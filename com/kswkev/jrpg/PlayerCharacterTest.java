@@ -22,4 +22,47 @@ class PlayerCharacterTest {
 
         assertEquals(50, pc.getHitPoints());
     }
+
+    @org.junit.jupiter.api.Test
+    void takeDamage() {
+
+        String name = "name";
+        PlayerCharacter pc = new PlayerCharacter(name);
+
+        int initialHP = pc.getHitPoints();
+
+        int damage = 20;
+        pc.takeDamage(damage);
+
+        assertEquals(initialHP - damage, pc.getHitPoints());
+
+    }
+
+    @org.junit.jupiter.api.Test
+    void takeDamageNotDead() {
+
+        String name = "name";
+        PlayerCharacter pc = new PlayerCharacter(name);
+
+        int initialHP = pc.getHitPoints();
+
+        int damage = 20;
+        pc.takeDamage(damage);
+
+        assertEquals(initialHP - damage, pc.getHitPoints());
+        assertFalse(pc.isDead());
+    }
+
+    @org.junit.jupiter.api.Test
+    void takeDamageIsDead() {
+
+        String name = "name";
+        PlayerCharacter pc = new PlayerCharacter(name);
+
+        int damage = 100;
+        pc.takeDamage(damage);
+
+        assertEquals(0, pc.getHitPoints());
+        assertTrue(pc.isDead());
+    }
 }
